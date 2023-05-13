@@ -2,15 +2,19 @@ const express = require('express');
 const biodataRouter = express.Router();
 
 biodataRouter.get('/api/biodata', function(req, res) {
-    const nama = req.body.nama;
-    const tempatLahir = req.body.tempatLahir;
-    const tanggalLahir = req.body.tanggalLahir;
-    const alamat = req.body.alamat;
+    console.log('using Query');
+    console.log(req.query);
+    console.log('using Body');
+    console.log(req.body);
+    const nama = req.query.nama || req.body.nama;
+    const tempatLahir = req.query['tempat-lahir'] || req.body['tempat-lahir'];
+    const tanggalLahir = req.query['tanggal-lahir'] || req.body['tanggal-lahir'];
+    const alamat = req.query.alamat || req.body.alamat;
 
     res.send({
         'nama': nama,
-        'tempatLahir': tempatLahir,
-        'tanggalLahir': tanggalLahir,
+        'tempat-lahir': tempatLahir,
+        'tanggal-lahir': tanggalLahir,
         'alamat': alamat
     });
 });
@@ -18,14 +22,14 @@ biodataRouter.get('/api/biodata', function(req, res) {
 biodataRouter.post('/api/biodata', function(req, res) {
     console.log(req.body);
     const nama = req.body.nama;
-    const tempatLahir = req.body.tempatLahir;
-    const tanggalLahir = req.body.tanggalLahir;
+    const tempatLahir = req.body['tempat-lahir'];
+    const tanggalLahir = req.body['tanggal-lahir'];
     const alamat = req.body.alamat;
 
     res.send({
         'nama': nama,
-        'tempatLahir': tempatLahir,
-        'tanggalLahir': tanggalLahir,
+        'tempat-lahir': tempatLahir,
+        'tanggal-lahir': tanggalLahir,
         'alamat': alamat
     });
 });
